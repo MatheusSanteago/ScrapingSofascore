@@ -3,7 +3,7 @@ import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
-url = 'https://www.sofascore.com/tournament/football/brazil/brasileiro-serie-a/325'
+url = 'https://www.sofascore.com/pt/torneio/futebol/brazil/brasileiro-serie-a/325'
 teams = []
 
 
@@ -24,8 +24,22 @@ def makeScraping(url):
         for div in table.find_all('a'):
             for img in div.find_all('img', alt=True):
                 teams.append(img['alt'])
+
+        dataAjust(table)  # Ajuste no DataFrame
     finally:
         driver.close()
+
+
+def dataAjust(html):
+    df_full = pd.read_html(str(html))[0].head(10)
+    df_teams = pd.DataFrame(teams).head(10)
+    df_full['Time'] = df_teams.replace(df_teams)
+    df_full.drop(columns=['#', 'Dribles realizados'])
+    df = df_full.rename(
+        columns={'Nota Sofascore': 'Nota', 'Gols esperados (xG)': 'xG'})
+    df = df[['Time', 'Nome', 'Gols', 'Assistências',
+             'Acerto no passe %', 'xG', 'Nota']]
+    print(df)
 
 
 makeScraping(url)
