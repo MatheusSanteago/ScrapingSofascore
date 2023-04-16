@@ -25,7 +25,7 @@ def makeScraping(url):
             for img in div.find_all('img', alt=True):
                 teams.append(img['alt'])
 
-        dataAjust(table)  # Ajuste no DataFrame
+        df = dataAjust(table)  # Ajuste no DataFrame
     finally:
         driver.close()
 
@@ -39,7 +39,7 @@ def dataAjust(html):
         columns={'Nota Sofascore': 'Nota', 'Gols esperados (xG)': 'xG'})
     df = df[['Time', 'Nome', 'Gols', 'Assistências',
              'Acerto no passe %', 'xG', 'Nota']]
-    print(df)
+    return df
 
 
 makeScraping(url)
