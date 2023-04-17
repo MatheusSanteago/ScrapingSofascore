@@ -14,7 +14,6 @@ driver = webdriver.Chrome(options=chrome_options)
 
 def makeScraping(url):
     try:
-        driver = webdriver.Firefox()
         driver.get(url)
         driver.implicitly_wait(10)
 
