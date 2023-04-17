@@ -19,7 +19,7 @@ def makeScraping(url):
         driver.implicitly_wait(10)
 
         table = driver.find_element(
-            By.XPATH, '//*[@id="__next"]/main/div[1]/div[2]/div[1]/div[7]/div/div[3]/div/table')  # Pega por padrão os melhores jogadores pela nota
+            By.XPATH, '/html/body/div[1]/main/div[1]/div[2]/div[1]/div[7]/div/div[3]/div/table')  # Pega por padrão os melhores jogadores pela nota
 
         data = table.get_attribute('outerHTML')
 
