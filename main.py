@@ -6,6 +6,10 @@ from selenium.webdriver.common.by import By
 url = 'https://www.sofascore.com/pt/torneio/futebol/brazil/brasileiro-serie-a/325'
 teams = []
 
+chrome_options = ChromeOptions()
+chrome_options.add_argument("--start-maximized")
+driver = webdriver.Chrome(options=chrome_options)
+
 
 def makeScraping(url):
     try:
