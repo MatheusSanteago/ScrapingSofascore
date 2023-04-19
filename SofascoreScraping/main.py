@@ -30,6 +30,7 @@ def makeScraping(url):
                 teams.append(img['alt'])
 
         df = dataAjust(table)  # Ajuste no DataFrame
+        print(df)
     finally:
         driver.close()
 
